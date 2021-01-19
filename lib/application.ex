@@ -16,7 +16,8 @@ defmodule SwarmDemo.Application do
     ]
 
     children = [
-      {Cluster.Supervisor, [topologies, [name: SwarmDemo.ClusterSupervisor]]}
+      {Cluster.Supervisor, [topologies, [name: SwarmDemo.ClusterSupervisor]]},
+      {SwarmDemo.MySupervisor, []}
 
     ]
 
