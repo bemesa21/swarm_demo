@@ -1,4 +1,4 @@
-defmodule SwarmDemo do
+defmodule SwarmDemo.Application do
   use Application
 
   def start(_type, _args) do
@@ -17,6 +17,7 @@ defmodule SwarmDemo do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: SwarmDemo.ClusterSupervisor]]}
+
     ]
 
 
