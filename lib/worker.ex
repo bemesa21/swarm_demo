@@ -20,9 +20,14 @@ defmodule SwarmDemo.Worker do
   #   - `:ignore`, to leave the process running on its current node
   #
   def handle_call({:swarm, :begin_handoff}, _from, {name, delay}) do
-    {:reply, :restart, {name, delay}}
+    {:reply, {:resume, {name, delay}}, {name, delay}}
   end
 
+
+  def handle_call(:some, _from, {name, delay}) do
+    IO.puts "#{inspect name} says #{delay}!"
+    {:reply, {name, delay}, {name, delay}}
+  end
 
   # called after the process has been restarted on its new node,
   # and the old process' state is being handed off. This is only
