@@ -1,5 +1,6 @@
 defmodule SwarmDemo.Worker do
   use GenServer
+
   @moduledoc """
   This is the worker process, in this case, it simply posts on a
   random recurring interval to stdout.
@@ -23,9 +24,8 @@ defmodule SwarmDemo.Worker do
     {:reply, {:resume, {name, delay}}, {name, delay}}
   end
 
-
   def handle_call(:some, _from, {name, delay}) do
-    IO.puts "#{inspect name} says #{delay}!"
+    IO.puts("#{inspect(name)} says #{delay}!")
     {:reply, {name, delay}, {name, delay}}
   end
 
@@ -38,6 +38,7 @@ defmodule SwarmDemo.Worker do
   def handle_cast({:swarm, :end_handoff, {name, delay}}, _state) do
     {:noreply, {name, delay}}
   end
+
   # called when a network split is healed and the local process
   # should continue running, but a duplicate process on the other
   # side of the split is handing off its state to us. You can choose
@@ -47,12 +48,12 @@ defmodule SwarmDemo.Worker do
     {:noreply, state}
   end
 
-
   def handle_info(:timeout, {name, delay}) do
-    IO.puts "#{inspect name} says #{delay}!"
+    IO.puts("#{inspect(name)} says #{delay}!")
     Process.send_after(self(), :timeout, delay)
     {:noreply, {name, delay}}
   end
+
   # this message is sent when this process should die
   # because it is being moved, use this as an opportunity
   # to clean up

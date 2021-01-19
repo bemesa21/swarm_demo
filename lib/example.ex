@@ -1,5 +1,4 @@
 defmodule SwarmDemo.ExampleUsage do
-
   @doc """
   Starts worker and registers name in the cluster, then joins the process
   to the `:foo` group
@@ -9,7 +8,7 @@ defmodule SwarmDemo.ExampleUsage do
     Swarm.join(:foo, pid)
   end
 
-   @doc """
+  @doc """
   Gets the pid of the worker with the given name
   """
   def get_worker(name), do: Swarm.whereis_name(name)
@@ -39,5 +38,4 @@ defmodule SwarmDemo.ExampleUsage do
   any failures or nil values are filtered out of the result list
   """
   def call_foos(msg), do: Swarm.multi_call(:foo, msg)
-
 end

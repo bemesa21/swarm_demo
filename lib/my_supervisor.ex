@@ -19,7 +19,8 @@ defmodule SwarmDemo.MySupervisor do
   Registers a new worker, and creates the worker process
   """
   def register(worker_name) do
-    DynamicSupervisor.start_child(__MODULE__,
+    DynamicSupervisor.start_child(
+      __MODULE__,
       {SwarmDemo.Worker, name: worker_name}
     )
   end
