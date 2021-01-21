@@ -29,6 +29,11 @@ defmodule SwarmDemo.ExampleUsage do
   def cast_worker(name, msg), do: GenServer.cast({:via, :swarm, name}, msg)
 
   @doc """
+  Send message to some worker by name
+  """
+  def send_message(name, msg), do: Swarm.send(name, msg)
+
+  @doc """
   Publish a message to all members of group `:foo`
   """
   def publish_foos(msg), do: Swarm.publish(:foo, msg)

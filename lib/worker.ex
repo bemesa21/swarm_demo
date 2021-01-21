@@ -24,8 +24,10 @@ defmodule SwarmDemo.Worker do
     {:reply, {:resume, {name, delay}}, {name, delay}}
   end
 
-  def handle_call(:some, _from, {name, delay}) do
-    IO.puts("#{inspect(name)} says #{delay}!")
+  @doc """
+  Replay with the worker info {name, delay}
+  """
+  def handle_call(:info, _from, {name, delay}) do
     {:reply, {name, delay}, {name, delay}}
   end
 
@@ -48,9 +50,26 @@ defmodule SwarmDemo.Worker do
     {:noreply, state}
   end
 
+  @doc """
+   Update worker delay without reply
+  """
+  def handle_cast({:update_delay, new_delay}, {name, _delay}) do
+    {:noreply, {name, new_delay}}
+  end
+
   def handle_info(:timeout, {name, delay}) do
-    IO.puts("#{inspect(name)} says #{delay}!")
+    # IO.puts("#{inspect(name)} says #{delay}!")
     Process.send_after(self(), :timeout, delay)
+    {:noreply, {name, delay}}
+  end
+
+  def handle_info(:hello, {name, delay}) do
+    IO.puts("#{inspect(name)} says: Hello!")
+    {:noreply, {name, delay}}
+  end
+
+  def handle_info(:delay, {name, delay}) do
+    IO.puts("#{inspect(name)} says: This is my delay: #{delay}!")
     {:noreply, {name, delay}}
   end
 
