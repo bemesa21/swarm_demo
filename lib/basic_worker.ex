@@ -1,4 +1,4 @@
-defmodule SwarmDemo.Worker do
+defmodule SwarmDemo.BasicWorker do
   use GenServer
 
   @moduledoc """

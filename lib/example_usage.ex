@@ -4,7 +4,7 @@ defmodule SwarmDemo.ExampleUsage do
   to the `:foo` group
   """
   def start_worker(name) do
-    {:ok, pid} = Swarm.register_name(name, SwarmDemo.MySupervisor, :register, [name])
+    {:ok, pid} = Swarm.register_name(name, SwarmDemo.WorkersSupervisor, :register, [name])
     Swarm.join(:foo, pid)
   end
 

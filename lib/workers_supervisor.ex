@@ -1,4 +1,4 @@
-defmodule SwarmDemo.MySupervisor do
+defmodule SwarmDemo.WorkersSupervisor do
   @moduledoc """
   This is the supervisor for the worker processes you wish to distribute
   across the cluster, Swarm is primarily designed around the use case
@@ -21,7 +21,7 @@ defmodule SwarmDemo.MySupervisor do
   def register(worker_name) do
     DynamicSupervisor.start_child(
       __MODULE__,
-      {SwarmDemo.Worker, name: worker_name}
+      {SwarmDemo.SessionWorker, name: worker_name}
     )
   end
 end

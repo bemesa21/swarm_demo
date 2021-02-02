@@ -18,7 +18,8 @@ defmodule SwarmDemo.Application do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: SwarmDemo.ClusterSupervisor]]},
-      {SwarmDemo.MySupervisor, []}
+      {SwarmDemo.WorkersSupervisor, []},
+      {SwarmDemo.Simulator, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
